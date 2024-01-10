@@ -1,0 +1,74 @@
+@import "../../../common/common-style";
+
+$gray: #717578;
+
+.photo-gallery{
+    @extend %wrapping;
+    background: $blueBg;
+    padding: 50px 50px 40px 75px;
+    gap: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.ph-stick{
+    width: 100vw;
+    min-height: 2px;
+    height: 2px;
+    background-color: #fff;
+    position: relative;
+}
+.phs-1::after{
+    content: "PHOTO GALLERY";
+    font-size: 34px;
+    font-weight: bolder;
+    width: 520px;
+    height: 50px;
+    padding-left: 50px;
+    top: 0; left: 0;
+    margin: auto;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    margin-left: -75px;
+}
+
+
+.photo-body{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 45px;
+
+    .photo{
+        width: 440px;
+        height: 250px;
+        border: 1px solid $gray;
+        @extend %centering;
+        &:hover{
+            background: rgba(0,0,0,0.1);
+        }
+    }
+}
+
+.phs-2{
+    width: calc(100% + 25px);
+    margin-left: -25px;
+}
+
+.pg-buttons{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    margin-top: -30px;
+    gap: 17px;
+    .button:not(:last-child){
+        pointer-events: none;
+        opacity: 0.5;
+    }
+}

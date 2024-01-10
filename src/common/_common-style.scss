@@ -1,0 +1,36 @@
+%wrapping{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    font-family: NBA;
+    font-smooth: always;
+}
+
+%centering{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+%imaging{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+%hovering{
+    background-color: #fff;
+    color: #000;
+    text-shadow: 0 0 1px black;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+    cursor: default;
+}
+
+$blueBg : #0b1922;
+$menu-bg : #333;
+$menu-bg2 : #3d484e;

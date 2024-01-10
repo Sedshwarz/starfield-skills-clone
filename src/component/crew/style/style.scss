@@ -1,0 +1,68 @@
+@import '../../../common/common-style';
+
+.crew{
+    @extend %wrapping;
+    background: {
+        image: url('../../../assets/other/crew-bg.jpg');
+        size: cover;
+        position: center;
+        repeat: no-repeat;
+    };
+
+    .button{
+        right: 545px;
+        bottom: 70px;
+        margin: auto;
+        position: absolute;
+    }
+}
+
+.credits{
+    gap: 50px;
+    transform: translateY(1080px);
+    animation: marquee linear;
+
+    h1, span{
+        font-family: CSD;
+        color: white;
+        font-size: 21px;
+        font-weight: 400;
+    }
+}
+.credits-column,
+.credits-column-names,
+.credits{
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes marquee {
+    100%{
+        transform: translateY(-200%);
+    }
+}
+
+.marquee{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    padding-left: 415px;
+    position: relative;
+    
+    &::before,
+    &::after{
+        content: "";
+        color: white;
+        position: absolute;
+        top: 0; left: 0;
+        margin: auto;
+        z-index: 20;
+        width: 100%;
+        box-shadow: 0 0 100px 70px rgba(0, 0, 0, 0.7);
+    }
+    &::after{
+        top: auto;
+        bottom: 0;
+    }
+
+}

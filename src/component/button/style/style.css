@@ -1,0 +1,57 @@
+.button .keyBox, .button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: default;
+}
+
+.button {
+  flex-direction: row;
+  gap: 15px;
+  transition: 0.15s;
+  color: #d7d8db;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  padding-left: 4px;
+}
+.button span {
+  font-size: 17px;
+  font-weight: 500;
+}
+.button .keyBox {
+  position: relative;
+  padding: 9px 12px;
+  font-size: 15px;
+  border: 1px solid #d7d8db;
+  border-radius: 8px;
+  font-weight: 400;
+  overflow: hidden;
+}
+.button .keyBox .button-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.2);
+  width: 0;
+  z-index: 1;
+  transition: 1s ease-out;
+  height: calc(100% - 2px);
+}
+.button .keyBox span {
+  z-index: 3;
+}
+.button:hover {
+  background: rgba(34, 39, 42, 0.5);
+}
+.button:active .button-bg {
+  width: 100%;
+}/*# sourceMappingURL=style.css.map */

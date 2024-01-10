@@ -1,0 +1,672 @@
+@import '../../../common/common-style';
+
+:root {
+    --progress: 0;
+    --progress2: 0;
+}
+
+$tabColors : #405f40,
+#b08c42,
+#a7312d,
+#246a8c,
+#70558a;
+
+$tabNames : 'physical',
+'social',
+'combat',
+'science',
+'tech';
+
+$cascs : #32434d,
+#1c3e4a,
+#272c52,
+#393b2d;
+
+$trsX : 0%,
+-69.5%,
+-139%,
+-208.5%,
+-278%;
+
+$skillInfoGray : #b4b6bb;
+$modalBorderColor : #39404c;
+
+%skill-badge {
+    min-width: 74px;
+    min-height: 93px;
+
+    img {
+        min-width: 220px;
+        max-width: 220px;
+        min-height: 275px;
+        max-height: 275px;
+    }
+}
+
+%ranking {
+    content: "";
+    height: 15px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    transform: skewX(-10deg);
+}
+
+/*-----------------------------------*/
+
+.none {
+    display: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.skills {
+    @extend %wrapping;
+    background: url('../../../assets/other/skills_bg.jpg');
+    padding-top: 50px;
+
+    .button:not(.modal-content-actions .button) {
+        position: absolute;
+        right: 60px;
+        bottom: 50px;
+        margin: auto
+    }
+}
+
+.skills-top {
+    @extend %centering;
+    width: 100%;
+    flex-direction: row;
+    gap: 30px;
+    color: #a9abaf;
+
+    .skills-arrow {
+        height: 36px;
+        width: 40px;
+        @extend %centering;
+        border-radius: 9px;
+        border: 1px solid #e9edf4;
+        font-size: 18px;
+        color: #e9edf4;
+    }
+
+    .skills-tabs {
+        list-style: none;
+        display: flex;
+
+        li {
+            @extend %centering;
+            width: 230px;
+            height: 40px;
+            font-size: 18px;
+            border-top: 1px solid #252c38;
+            border-bottom: 1px solid #252c38;
+            border-right: 1px solid #252c38;
+            font-weight: 500;
+
+            &:first-child {
+                border-left: 1px solid #252c38;
+            }
+
+            &:not(.active-skill-tab) {
+                background: #0f1521;
+            }
+        }
+
+        .active-skill-tab {
+            background: #b7b7b7;
+            color: #373737;
+            font-weight: 600;
+        }
+    }
+}
+
+
+.skill-points {
+    position: absolute;
+    left: 50px;
+    bottom: 50px;
+    margin: auto;
+    width: 190px;
+    height: 80px;
+    border: 1px solid #6b7179;
+    color: #abadb1;
+    font-size: 20px;
+    font-weight: 600;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+
+    span {
+        color: white;
+        font-size: 27px;
+    }
+}
+
+
+
+
+
+.tabs-wrapper {
+    width: 100%;
+    position: relative;
+    margin-top: 120px;
+
+    .tabs-container {
+        display: flex;
+        flex-direction: row;
+        gap: 120px;
+        margin-left: 540px;
+        transition: 0.5s ease;
+
+        .active-skill-tab {
+            transform: translateY(-8%);
+        }
+
+        .skill-tab:not(.active-skill-tab) {
+            pointer-events: none
+        }
+
+        .skill-tab {
+            @extend %centering;
+            min-width: 840px;
+            max-width: 840px;
+            gap: 3px;
+            position: relative;
+            transition: 0.5s ease;
+
+            .skill-tab-head {
+                @extend %centering;
+                height: 45px;
+                width: 100%;
+                font-size: 18px;
+                font-weight: 500;
+                color: white;
+            }
+
+            .cascading {
+                @extend %centering;
+                width: 100%;
+                height: 140px;
+                flex-direction: row;
+                gap: 60px;
+
+                img {
+                    zoom: 0.34;
+                }
+
+                .level1-badge {
+                    @extend %centering;
+                    @extend %skill-badge;
+                    background: #8a8989;
+                    zoom: 0.9;
+                    position: relative;
+
+                    img {
+                        zoom: 0.32;
+
+                        &:not(.level1) {
+                            filter: brightness(35%);
+                        }
+                    }
+                }
+
+                .locked-badge {
+                    opacity: 0.7;
+
+                    img {
+                        filter: brightness(30%);
+                    }
+                }
+
+                .cascading-item {
+                    position: relative;
+
+                    &::after {
+                        content: attr(data-title);
+                        position: absolute;
+                        background: #b7b7b7;
+                        color: #3f3f3f;
+                        padding: 7px 12px;
+                        font-weight: 600;
+                        position: absolute;
+                        bottom: -35px;
+                        left: 0;
+                        right: 0;
+                        transform: translateX(calc(-50% + 33px));
+                        margin: auto;
+                        white-space: nowrap;
+                        width: max-content;
+                        z-index: 7;
+                        opacity: 0;
+                    }
+
+                    &:hover::after {
+                        opacity: 1;
+                    }
+
+                    &:hover .level1-badge {
+                        background: #0cafe8;
+                    }
+
+                    &:hover div:not(.level1-badge):not(.locked-badge) img {
+                        filter: drop-shadow(0 0 7px #0fbfff);
+                    }
+                }
+            }
+        }
+
+        .physical .cascading .level1-badge {
+            clip-path: polygon(25% 0, 75% 0, 100% 63%, 83% 100%, 17% 100%, 0 63%);
+        }
+
+        .social .cascading .level1-badge {
+            clip-path: polygon(15% 0, 85% 0, 100% 50%, 85% 100%, 15% 100%, 0% 50%);
+        }
+
+        .combat .cascading .level1-badge {
+            background-repeat: none;
+            -webkit-mask-image: url('../../../assets/other/combat-mask.png');
+            mask-image: url('../../../assets/other/combat-mask.png');
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: 100%;
+            mask-size: 100%;
+            -webkit-mask-position: 0px 0px;
+            mask-position: 0px 0px;
+        }
+
+        .science .cascading .level1-badge {
+            clip-path: ellipse(50% 50% at 50% 50%);
+        }
+
+        .tech .cascading .level1-badge {
+            clip-path: polygon(50% 0, 100% 13%, 100% 87%, 50% 100%, 0 87%, 0 13%);
+        }
+
+        /*
+        .rankUpActive::before{
+            content: '';
+            width: 200px;
+            height: 100px;
+            rotate: -60deg;
+            inset: 0;
+            background-color: white;
+            position: absolute;
+            transform: translate(0,-200%);
+            animation: glimpse 4s ease-in-out infinite;
+        }
+        @keyframes glimpse {
+            0%{
+                transform: translate(0,-200%);
+            }
+            50%{
+                transform: translate(0,100%);
+            }
+            100%{
+                transform: translate(0,100%);
+            }
+        }
+        */
+
+
+        .skill-tab-info {
+            width: 100%;
+            height: 180px;
+            background: #0e1420;
+            border: 1px solid $modalBorderColor;
+            position: absolute;
+            bottom: -183px;
+            margin: auto;
+            flex-direction: row;
+            font-family: CSD;
+            color: #ebe4e4;
+            font-size: 19px;
+            line-height: 19px;
+
+            .sti-left {
+                width: 350px;
+                height: 100%;
+                border-right: 1px solid $modalBorderColor;
+                padding: 20px;
+
+                .challange-progress {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 30px;
+
+                    .cp-top {
+                        width: 100%;
+                        position: relative;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        .cp-top-value {
+                            color: $skillInfoGray;
+                            font-family: NBA;
+                            font-weight: 500;
+                        }
+
+                        &:not(.cptv2)::before,
+                        &:not(.cptv2)::after {
+                            content: '';
+                            width: 99%;
+                            height: 3px;
+                            background-color: $skillInfoGray;
+                            position: absolute;
+                            bottom: -12px;
+                            margin: auto;
+                            border-radius: 9px;
+                        }
+
+                        &:not(.cptv2)::after {
+                            width: var(--progress);
+                            background-color: #f3f0f0;
+                        }
+                    }
+                }
+            }
+
+            .sti-right {
+                width: calc(100% - 350px);
+
+                .sti-right-top {
+                    width: 100%;
+                    height: 50px;
+                    border-bottom: 1px solid $modalBorderColor;
+                    display: flex;
+                    align-items: center;
+                    padding-left: 20px;
+
+                    span:not(.stirt-locked) {
+                        color: $skillInfoGray;
+                        font-family: NBA;
+                        font-weight: 500;
+                        margin-left: 25px;
+                    }
+
+                    .stirt-locked {
+                        font-size: 20px;
+                        color: #b02931;
+                        font-weight: 500;
+                    }
+                }
+
+                .sti-right-bottom {
+                    padding: 12px 20px;
+                    color: $skillInfoGray;
+                }
+            }
+        }
+
+
+    }
+}
+
+
+
+@for $i from 1 through 5 {
+    @if ($i < 5) {
+        .cascading#{$i} {
+            background: nth($cascs, $i);
+        }
+    }
+
+    .#{nth($tabNames, $i)} .skill-tab-head,
+    .theme-#{nth($tabNames, $i)} {
+        background: nth($tabColors, $i);
+    }
+
+    .active-#{nth($tabNames, $i)} {
+        transform: translateX(nth($trsX, $i));
+    }
+}
+
+
+/*  SKILLS MODAL  */
+
+.modal {
+    position: absolute;
+    width: 1920px;
+    height: 1080px;
+    margin-top: -90px;
+    @extend %centering;
+    z-index: 21;
+
+    .modal-fade {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 22;
+        background: rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-content {
+        width: 900px;
+        height: 750px;
+        margin-top: -10px;
+        z-index: 23;
+        border: 1px solid $modalBorderColor;
+        background: #0d131f;
+        color: white;
+        font-family: CSD;
+
+        .modal-content-head {
+            width: 100%;
+            height: 45px;
+            @extend %centering;
+            font-size: 21px;
+            font-family: NBA;
+            font-weight: 500;
+        }
+
+        .modal-content-explanation {
+            width: 100%;
+            height: 70px;
+            padding: 0 60px 0 20px;
+            display: flex;
+            align-items: center;
+            border: 1px solid $modalBorderColor;
+            font-size: 18.5px;
+            font-weight: 400;
+        }
+
+        .modal-content-body {
+            height: 550px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            border-bottom: 1px solid $modalBorderColor;
+
+            .modal-content-body-left {
+                @extend %centering;
+                width: 415px;
+                height: 100%;
+                border-right: 1px solid $modalBorderColor;
+
+                .badge-area {
+                    @extend %centering;
+                    width: 100%;
+                    height: 400px;
+                }
+
+                .mcbl-bottom {
+                    width: 100%;
+                    height: 150px;
+                
+                    .mcblb-info{
+                        @extend %centering;
+                        width: 100%;
+                        gap: 14px;
+                        padding: 20px;
+
+                        .cp-top{
+                            font: {
+                                family: NBA;
+                                size: 19px;
+                                weight: 500;
+                            };
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            align-items: center;
+                            width: 100%;
+                        }
+
+                        .cp-prg-stc{
+                            width: 100%;
+                            position: relative;
+                            height: 4px;
+                            background-color: #b6b7ba;
+
+                            &:not(.cpsf)::after{
+                                content: "";
+                                width: var(--progress2);
+                                transition: 0.25s ease;
+                                height: 100%;
+                                top: 0; left: 0;
+                                position: absolute;
+                                background-color: #fff;
+                            }
+                        }
+
+                        b {
+                            font-size: 18px;
+                            filter: brightness(700%);
+                        }
+
+                        p{
+                            width: 100%;
+                            font-size: 18px;
+                            text-shadow: 0 0 1px #fff;
+                        }
+                    }
+                }
+            }
+
+            .modal-content-body-right {
+                width: calc(900px - 415px - 1px);
+                height: 100%;
+                @extend %centering;
+
+                .rank {
+                    width: 100%;
+                    height: 137.5px;
+                    transition: 0.2s ease;
+                    font-family: CSD;
+                    padding: 13px 20px 20px 45px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 7px;
+                    font-size: 18px;
+                    color: #fff;
+                    
+                    &:not(.white-painted){
+                        color: #bec0c4;
+                    }
+
+                    &:hover {
+                        background: #0b2e42;
+                    }
+
+                    .rankHeader {
+                        font-family: NBA;
+                        font-weight: 600;
+                        position: relative;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 9px;
+
+                        &::before {
+                            @extend %ranking;
+                            width: 7px;
+                            left: -25px;
+                            background: #b7b7b8;
+                        }
+
+                        b {
+                            font-size: 15px;
+                            filter: grayscale(100%);
+                        }
+
+                        font:not(.rank-ava) {
+                            color: #cfe1ec;
+                        }
+                    }
+
+                    p {
+                        text-shadow: 0 0 2px #bec0c4;
+                    }
+
+                    .rh2 {
+                        &::before {
+                            width: 4px;
+                            left: -30px;
+                        }
+
+                        &::after {
+                            @extend %ranking;
+                            width: 8px;
+                            left: -23px;
+                            background: #b7b7b8;
+                        }
+                    }
+
+                    .rh3 {
+                        &::before {
+                            width: 7px;
+                            left: -25px;
+                            background: #e1992f;
+                        }
+                    }
+
+                    .rh4 {
+                        &::before {
+                            width: 4px;
+                            left: -30px;
+                            background: #e1992f;
+                        }
+
+                        &::after {
+                            @extend %ranking;
+                            width: 8px;
+                            left: -23px;
+                            background: #e1992f;
+                        }
+                    }
+                }
+                .hovered-rank {
+                    background: #0b2e42;
+                }
+            }
+        }
+
+        .modal-content-actions {
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 5px 25px 0 0;
+            gap: 10px;
+
+            .button {
+                font-family: NBA;
+            }
+
+            .disabled .button {
+                pointer-events: none;
+                opacity: 0.6;
+            }
+        }
+    }
+}

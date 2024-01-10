@@ -1,0 +1,48 @@
+@import '../../../common/_common-style.scss';
+$color : #d7d8db;
+
+.button{
+    @extend %centering;
+    flex-direction: row;
+    gap: 15px;
+    transition: 0.15s;
+    color: $color;
+    user-select: none;
+    padding-left: 4px;
+
+    span{
+        font-size: 17px;
+        font-weight: 500;
+    }
+    .keyBox{
+        position: relative;
+        padding: 9px 12px;
+        font-size: 15px;
+        border: 1px solid $color;
+        border-radius: 8px;
+        font-weight: 400;
+        @extend %centering;
+        overflow: hidden;
+
+        .button-bg{
+            position: absolute;
+            top: 0; left: 0; bottom: 0;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.2);
+            width: 0;
+            z-index: 1;
+            transition: 1s ease-out;
+            height: calc(100% - 2px);
+        }
+        span{
+            z-index: 3;
+        }
+    }
+
+    &:hover{
+        background: rgba(34, 39, 42, 0.5);
+    }
+    &:active .button-bg{
+        width: 100%;
+    }
+}

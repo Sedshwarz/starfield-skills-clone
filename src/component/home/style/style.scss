@@ -1,0 +1,219 @@
+@import "../../../common/_common-style";
+
+.menu-wrapper a{
+    text-decoration: none;
+    width: 100%;
+}
+
+.none{display: none;}
+.disable{pointer-events: none;}
+
+.home{
+    @extend %wrapping;
+    @extend %imaging;
+    background-image: url('../../../assets/other/home-bg.jpg');
+
+    .bethesda-logo{
+        position: absolute;
+        bottom: 50px;
+        left: 50px;
+        margin: auto;
+        width: 140px;
+        height: 66px;
+    }
+
+    .home-card{
+        @extend %imaging;
+        position: absolute;
+        top: 40px;
+        right: 40px;
+        margin: auto;
+        width: 700px;
+        height: 300px;
+        border: 1px solid gray;
+        background-image: url('../../../assets/other/home-card.jpg');
+        padding: 20px;
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column;
+        gap: 10px;
+
+        div,p{
+            width: 40%;
+        }
+        div{
+            padding-bottom: 10px;
+            font-size: 20px;
+            font-weight: 500;
+            color: white;
+            border-bottom: 1px solid lightgray;
+        }
+        p{
+            font-family: CSD;
+            font-size: 17px;
+            color: #c0c1c3;
+        }
+    }
+}
+
+
+
+/*  MENU  */
+
+
+.menu-wrapper{
+    position: absolute;
+    top: 375px;
+    left: 60px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 15px;
+
+}
+
+.menu{
+    @extend %centering;
+    width: 220px;
+    gap: 2px;
+
+    .menu-item{
+        width: 100%;
+        background-color: $menu-bg;
+        color: #fff;
+        height: 40px;
+        font-size: 20px;
+        font-weight: 500;
+        padding-left: 20px;
+        display: flex;
+        align-items: center;
+
+        &:hover{
+            @extend %hovering;
+        }
+    }
+}
+
+
+/*  MENU CONTENT  */
+
+.menu-content{
+    width: 880px;
+    max-height: 500px;
+    overflow: auto;
+    padding-right: 15px;
+    rotate: 180deg;
+
+    &::-webkit-scrollbar {width: 4px;}
+    &::-webkit-scrollbar-track {background: #272727;}
+    &::-webkit-scrollbar-thumb {background: #bcbcbc;}
+}
+
+.continue-items, .load-items, .characters{
+    @extend %centering;
+    rotate: -180deg;
+    width: 100%;
+    gap: 2px;
+
+    .continue-items-item, .load-items-item, .characters-item{
+        width: 100%;
+        height: 120px;
+        padding: 15px 20px;
+        background-color: $menu-bg;
+        color: #fff;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-family: CSD;
+        font-size: 20px;
+        user-select: none;
+
+        .cii-left, .lii-left{
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            #ciil-profile{
+                font-weight: 600;
+            }
+        }
+
+        .cii-right, .lii-right{
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            gap: 8px;
+            flex-direction: column;
+
+            div{
+                display: flex;
+                gap: 60px;
+            }
+        }
+    }
+}
+
+.characters .characters-item{
+    height: 80px;
+    align-items: center;
+    padding-left: 25px;
+    font-family: NBA;
+    font-size: 19px;
+    font-weight: 600;
+    
+    &:hover{
+        @extend %hovering;
+        font-weight: 600;
+    }
+}
+
+.load-items .load-items-item{
+    height: 80px;
+    position: relative;
+    padding: 15px 20px 15px 100px;
+    align-items: center;
+
+    .list-no{
+        @extend %centering;
+        position: absolute;
+        left: 25px; top: 0;
+        height: 100%;
+        margin: auto;
+        height: 100%;
+    }
+}
+
+.menu-wrapper .menu-content .continue-items .cii-active,
+.menu-wrapper .menu-content .load-items .lii-active{
+    @extend %hovering;
+}
+
+.menu-wrapper .menu .active-menu-item{
+    @extend %hovering;
+}
+
+
+
+
+
+// NEW GAME BLOCK
+.new-block{
+    @extend %centering;
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 50px;
+    margin: auto;
+    gap: 80px;
+
+    h1{
+        color: white;
+        font-weight: 600;
+        font-size: 32px;
+    }
+    .new-block-buttons{
+        @extend %centering;
+        flex-direction: row;
+        gap: 20px;
+    }
+}
